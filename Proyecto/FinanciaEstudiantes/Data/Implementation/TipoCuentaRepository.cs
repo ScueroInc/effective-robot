@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,34 @@ namespace Data.Implementation
 
         public List<TipoCuenta> FindAll()
         {
-            throw new NotImplementedException();
+            var TipoCuentas = new List<TipoCuenta>();
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("select IDTipoCuenta,NTipoCuenta,MTipoCuenta,TiempoCuenta from TipoCuenta", con);
+
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while(dr.Read())
+                        {
+                            var tipocuenta = new TipoCuenta();
+                            tipocuenta.IDTipoCuenta = Convert.ToInt32(dr["IDTipoCuenta"]);
+                            tipocuenta.NTipoCuenta = (dr["NTipoCuenta"]).ToString();
+                            tipocuenta.MTipoCuenta = Convert.ToDecimal(dr["MTipoCuenta"]);
+                            tipocuenta.TiempoCuenta = Convert.ToInt32(dr["TiempoCuenta"]);
+                            TipoCuentas.Add(tipocuenta);
+                        }
+                    }
+                }
+            }
+            catch ( Exception ex)
+            {
+
+                throw ex;
+            }
+            return TipoCuentas;
         }
 
         public TipoCuenta FindByID(int? id)
@@ -26,7 +55,32 @@ namespace Data.Implementation
 
         public bool Insert(TipoCuenta t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+
+                    var query = new SqlCommand("insert into TipoCuenta values (@NTipoCuenta,@MTipoCuenta,@TiempoCuenta)", con);
+
+                    query.Parameters.AddWithValue("@NTipoCuenta", t.NTipoCuenta);
+                    query.Parameters.AddWithValue("@MTipoCuenta", t.MTipoCuenta);
+                    query.Parameters.AddWithValue("@TiempoCuenta", t.TiempoCuenta);
+
+                    query.ExecuteNonQuery();
+
+                    rpta = true;
+                }
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            return rpta;
         }
 
         public bool Update(TipoCuenta t)

@@ -123,7 +123,7 @@ namespace Data.Implementation
                     query.Parameters.AddWithValue("@Nickname", t.Nickname);
                     query.Parameters.AddWithValue("@Password", t.Password);
                     query.Parameters.AddWithValue("@Celular", t.Celular);
-                    query.Parameters.AddWithValue("@IDTipoCuenta", t.IDTipoCuenta);
+                    query.Parameters.AddWithValue("@IDTipoCuenta", t.IDTipoCuenta.IDTipoCuenta);
 
                     query.ExecuteNonQuery();
 

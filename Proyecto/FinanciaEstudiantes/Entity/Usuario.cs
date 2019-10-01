@@ -21,8 +21,8 @@ namespace Entity
         [DisplayName("apellido del usuario")]
         public string Apellido { get; set; }
 
-        [Required(ErrorMessage = "Porfavor ingrese el email del usuario: ")]
-	[RegularExpressionAttribute(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage="Ingrese un email valido")]
+        [Required(ErrorMessage = "Porfavor, ingrese el email del usuario: ")]
+        [RegularExpressionAttribute(@"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", ErrorMessage = "Ingrese un email valido")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Porfavor, ingrese un nickname del usuario: ")]

@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_FinanciamientoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categoria_Deuda">
+    <Key>
+      <PropertyRef Name="IDCategoriaDeuda" />
+    </Key>
+    <Property Name="IDCategoriaDeuda" Type="int" Nullable="false" />
+    <Property Name="NCategoriaDeuda" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categoria_Gasto">
+    <Key>
+      <PropertyRef Name="IDCategoria_Gasto" />
+    </Key>
+    <Property Name="IDCategoria_Gasto" Type="int" Nullable="false" />
+    <Property Name="NCategoria_Gasto" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categoria_Ingreso">
+    <Key>
+      <PropertyRef Name="IDCategoria_Ingreso" />
+    </Key>
+    <Property Name="IDCategoria_Ingreso" Type="int" Nullable="false" />
+    <Property Name="NCategoria_Ingreso" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetalleReporte">
+    <Key>
+      <PropertyRef Name="IDTransaccion" />
+      <PropertyRef Name="IDReporte" />
+    </Key>
+    <Property Name="IDTransaccion" Type="int" Nullable="false" />
+    <Property Name="IDReporte" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Deuda">
+    <Key>
+      <PropertyRef Name="IDDeuda" />
+    </Key>
+    <Property Name="IDDeuda" Type="int" Nullable="false" />
+    <Property Name="NDeuda" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaInicioDeuda" Type="date" Nullable="false" />
+    <Property Name="FechaFinDeuda" Type="date" Nullable="false" />
+    <Property Name="TDescripcion" Type="text" Nullable="false" />
+    <Property Name="Interes" Type="real" />
+    <Property Name="MontoDeuda" Type="money" Nullable="false" />
+    <Property Name="IDDivisa" Type="int" Nullable="false" />
+    <Property Name="IDCategoriaDeuda" Type="int" Nullable="false" />
+    <Property Name="IDEntidad" Type="int" Nullable="false" />
+    <Property Name="IDUsuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Divisa">
+    <Key>
+      <PropertyRef Name="IDDivisa" />
+    </Key>
+    <Property Name="IDDivisa" Type="int" Nullable="false" />
+    <Property Name="NDivisa" Type="nvarchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entidad">
+    <Key>
+      <PropertyRef Name="IDEntidad" />
+    </Key>
+    <Property Name="IDEntidad" Type="int" Nullable="false" />
+    <Property Name="NEntidad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDEntidad_Tipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Entidad_Tipo">
+    <Key>
+      <PropertyRef Name="IDEntidad_Tipo" />
+    </Key>
+    <Property Name="IDEntidad_Tipo" Type="int" Nullable="false" />
+    <Property Name="NEntida_Tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Frecuencia">
+    <Key>
+      <PropertyRef Name="IDFrecuencia" />
+    </Key>
+    <Property Name="IDFrecuencia" Type="int" Nullable="false" />
+    <Property Name="NFrecuencia" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TDescripcion" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gasto">
+    <Key>
+      <PropertyRef Name="IDGasto" />
+      <PropertyRef Name="IDCategoria_Gasto" />
+    </Key>
+    <Property Name="IDGasto" Type="int" Nullable="false" />
+    <Property Name="IDCategoria_Gasto" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ingreso">
+    <Key>
+      <PropertyRef Name="IDIngreso" />
+      <PropertyRef Name="IDCategoria_Ingreso" />
+    </Key>
+    <Property Name="IDIngreso" Type="int" Nullable="false" />
+    <Property Name="IDCategoria_Ingreso" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mes">
+    <Key>
+      <PropertyRef Name="IDMes" />
+    </Key>
+    <Property Name="IDMes" Type="int" Nullable="false" />
+    <Property Name="NMes" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reporte">
+    <Key>
+      <PropertyRef Name="IDReporte" />
+    </Key>
+    <Property Name="IDReporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaReporte" Type="date" Nullable="false" />
+    <Property Name="FechaInicio" Type="date" Nullable="false" />
+    <Property Name="FechaTermino" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TipoCuenta">
+    <Key>
+      <PropertyRef Name="IDTipoCuenta" />
+    </Key>
+    <Property Name="IDTipoCuenta" Type="int" Nullable="false" />
+    <Property Name="NTipoCuenta" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="MTipoCuenta" Type="money" Nullable="false" />
+    <Property Name="TiempoCuenta" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transaccion">
+    <Key>
+      <PropertyRef Name="IDTransaccion" />
+    </Key>
+    <Property Name="IDTransaccion" Type="int" Nullable="false" />
+    <Property Name="NTransaccion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MontoTransaccion" Type="money" Nullable="false" />
+    <Property Name="FechaTransaccion" Type="datetime" Nullable="false" />
+    <Property Name="IDDivisa" Type="int" Nullable="false" />
+    <Property Name="IDMes" Type="int" Nullable="false" />
+    <Property Name="IDUsuario" Type="int" Nullable="false" />
+    <Property Name="IDFrecuencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IDUsuario" />
+    </Key>
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nickname" Type="varchar" MaxLength="25" />
+    <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Celular" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="IDTipoCuenta" Type="int" Nullable="false" />
+    <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="Deuda_Categoria_Deuda">
+    <End Role="Categoria_Deuda" Type="Self.Categoria_Deuda" Multiplicity="1" />
+    <End Role="Deuda" Type="Self.Deuda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria_Deuda">
+        <PropertyRef Name="IDCategoriaDeuda" />
+      </Principal>
+      <Dependent Role="Deuda">
+        <PropertyRef Name="IDCategoriaDeuda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Deuda_Divisa">
+    <End Role="Divisa" Type="Self.Divisa" Multiplicity="1" />
+    <End Role="Deuda" Type="Self.Deuda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Divisa">
+        <PropertyRef Name="IDDivisa" />
+      </Principal>
+      <Dependent Role="Deuda">
+        <PropertyRef Name="IDDivisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Deuda_Entidad">
+    <End Role="Entidad" Type="Self.Entidad" Multiplicity="1" />
+    <End Role="Deuda" Type="Self.Deuda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entidad">
+        <PropertyRef Name="IDEntidad" />
+      </Principal>
+      <Dependent Role="Deuda">
+        <PropertyRef Name="IDEntidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Deuda_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Deuda" Type="Self.Deuda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="Deuda">
+        <PropertyRef Name="IDUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Entidad_Entidad_Tipo">
+    <End Role="Entidad_Tipo" Type="Self.Entidad_Tipo" Multiplicity="1" />
+    <End Role="Entidad" Type="Self.Entidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entidad_Tipo">
+        <PropertyRef Name="IDEntidad_Tipo" />
+      </Principal>
+      <Dependent Role="Entidad">
+        <PropertyRef Name="IDEntidad_Tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Gasto_Categoria_Gasto">
+    <End Role="Categoria_Gasto" Type="Self.Categoria_Gasto" Multiplicity="1" />
+    <End Role="Gasto" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria_Gasto">
+        <PropertyRef Name="IDCategoria_Gasto" />
+      </Principal>
+      <Dependent Role="Gasto">
+        <PropertyRef Name="IDCategoria_Gasto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Gasto_Transaccion">
+    <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="1" />
+    <End Role="Gasto" Type="Self.Gasto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaccion">
+        <PropertyRef Name="IDTransaccion" />
+      </Principal>
+      <Dependent Role="Gasto">
+        <PropertyRef Name="IDGasto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Ingreso_Categoria_Ingreso">
+    <End Role="Categoria_Ingreso" Type="Self.Categoria_Ingreso" Multiplicity="1" />
+    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria_Ingreso">
+        <PropertyRef Name="IDCategoria_Ingreso" />
+      </Principal>
+      <Dependent Role="Ingreso">
+        <PropertyRef Name="IDCategoria_Ingreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Ingreso_Transaccion">
+    <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="1" />
+    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaccion">
+        <PropertyRef Name="IDTransaccion" />
+      </Principal>
+      <Dependent Role="Ingreso">
+        <PropertyRef Name="IDIngreso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Table_24_Reporte">
+    <End Role="Reporte" Type="Self.Reporte" Multiplicity="1" />
+    <End Role="DetalleReporte" Type="Self.DetalleReporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reporte">
+        <PropertyRef Name="IDReporte" />
+      </Principal>
+      <Dependent Role="DetalleReporte">
+        <PropertyRef Name="IDReporte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Table_24_Transaccion">
+    <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="1" />
+    <End Role="DetalleReporte" Type="Self.DetalleReporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaccion">
+        <PropertyRef Name="IDTransaccion" />
+      </Principal>
+      <Dependent Role="DetalleReporte">
+        <PropertyRef Name="IDTransaccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Transaccion_Divisa">
+    <End Role="Divisa" Type="Self.Divisa" Multiplicity="1" />
+    <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Divisa">
+        <PropertyRef Name="IDDivisa" />
+      </Principal>
+      <Dependent Role="Transaccion">
+        <PropertyRef Name="IDDivisa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Transaccion_Frecuencia">
+    <End Role="Frecuencia" Type="Self.Frecuencia" Multiplicity="1" />
+    <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Frecuencia">
+        <PropertyRef Name="IDFrecuencia" />
+      </Principal>
+      <Dependent Role="Transaccion">
+        <PropertyRef Name="IDFrecuencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Transaccion_Mes">
+    <End Role="Mes" Type="Self.Mes" Multiplicity="1" />
+    <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mes">
+        <PropertyRef Name="IDMes" />
+      </Principal>
+      <Dependent Role="Transaccion">
+        <PropertyRef Name="IDMes" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Transaccion_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Transaccion" Type="Self.Transaccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IDUsuario" />
+      </Principal>
+      <Dependent Role="Transaccion">
+        <PropertyRef Name="IDUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Usuario_TipoCuenta">
+    <End Role="TipoCuenta" Type="Self.TipoCuenta" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoCuenta">
+        <PropertyRef Name="IDTipoCuenta" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IDTipoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_FinanciamientoModelStoreContainer">
+    <EntitySet Name="Categoria_Deuda" EntityType="Self.Categoria_Deuda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categoria_Gasto" EntityType="Self.Categoria_Gasto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categoria_Ingreso" EntityType="Self.Categoria_Ingreso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleReporte" EntityType="Self.DetalleReporte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deuda" EntityType="Self.Deuda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Divisa" EntityType="Self.Divisa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entidad" EntityType="Self.Entidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entidad_Tipo" EntityType="Self.Entidad_Tipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Frecuencia" EntityType="Self.Frecuencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gasto" EntityType="Self.Gasto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ingreso" EntityType="Self.Ingreso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mes" EntityType="Self.Mes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reporte" EntityType="Self.Reporte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoCuenta" EntityType="Self.TipoCuenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaccion" EntityType="Self.Transaccion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Deuda_Categoria_Deuda" Association="Self.Deuda_Categoria_Deuda">
+      <End Role="Categoria_Deuda" EntitySet="Categoria_Deuda" />
+      <End Role="Deuda" EntitySet="Deuda" />
+    </AssociationSet>
+    <AssociationSet Name="Deuda_Divisa" Association="Self.Deuda_Divisa">
+      <End Role="Divisa" EntitySet="Divisa" />
+      <End Role="Deuda" EntitySet="Deuda" />
+    </AssociationSet>
+    <AssociationSet Name="Deuda_Entidad" Association="Self.Deuda_Entidad">
+      <End Role="Entidad" EntitySet="Entidad" />
+      <End Role="Deuda" EntitySet="Deuda" />
+    </AssociationSet>
+    <AssociationSet Name="Deuda_Usuario" Association="Self.Deuda_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Deuda" EntitySet="Deuda" />
+    </AssociationSet>
+    <AssociationSet Name="Entidad_Entidad_Tipo" Association="Self.Entidad_Entidad_Tipo">
+      <End Role="Entidad_Tipo" EntitySet="Entidad_Tipo" />
+      <End Role="Entidad" EntitySet="Entidad" />
+    </AssociationSet>
+    <AssociationSet Name="Gasto_Categoria_Gasto" Association="Self.Gasto_Categoria_Gasto">
+      <End Role="Categoria_Gasto" EntitySet="Categoria_Gasto" />
+      <End Role="Gasto" EntitySet="Gasto" />
+    </AssociationSet>
+    <AssociationSet Name="Gasto_Transaccion" Association="Self.Gasto_Transaccion">
+      <End Role="Transaccion" EntitySet="Transaccion" />
+      <End Role="Gasto" EntitySet="Gasto" />
+    </AssociationSet>
+    <AssociationSet Name="Ingreso_Categoria_Ingreso" Association="Self.Ingreso_Categoria_Ingreso">
+      <End Role="Categoria_Ingreso" EntitySet="Categoria_Ingreso" />
+      <End Role="Ingreso" EntitySet="Ingreso" />
+    </AssociationSet>
+    <AssociationSet Name="Ingreso_Transaccion" Association="Self.Ingreso_Transaccion">
+      <End Role="Transaccion" EntitySet="Transaccion" />
+      <End Role="Ingreso" EntitySet="Ingreso" />
+    </AssociationSet>
+    <AssociationSet Name="Table_24_Reporte" Association="Self.Table_24_Reporte">
+      <End Role="Reporte" EntitySet="Reporte" />
+      <End Role="DetalleReporte" EntitySet="DetalleReporte" />
+    </AssociationSet>
+    <AssociationSet Name="Table_24_Transaccion" Association="Self.Table_24_Transaccion">
+      <End Role="Transaccion" EntitySet="Transaccion" />
+      <End Role="DetalleReporte" EntitySet="DetalleReporte" />
+    </AssociationSet>
+    <AssociationSet Name="Transaccion_Divisa" Association="Self.Transaccion_Divisa">
+      <End Role="Divisa" EntitySet="Divisa" />
+      <End Role="Transaccion" EntitySet="Transaccion" />
+    </AssociationSet>
+    <AssociationSet Name="Transaccion_Frecuencia" Association="Self.Transaccion_Frecuencia">
+      <End Role="Frecuencia" EntitySet="Frecuencia" />
+      <End Role="Transaccion" EntitySet="Transaccion" />
+    </AssociationSet>
+    <AssociationSet Name="Transaccion_Mes" Association="Self.Transaccion_Mes">
+      <End Role="Mes" EntitySet="Mes" />
+      <End Role="Transaccion" EntitySet="Transaccion" />
+    </AssociationSet>
+    <AssociationSet Name="Transaccion_Usuario" Association="Self.Transaccion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Transaccion" EntitySet="Transaccion" />
+    </AssociationSet>
+    <AssociationSet Name="Usuario_TipoCuenta" Association="Self.Usuario_TipoCuenta">
+      <End Role="TipoCuenta" EntitySet="TipoCuenta" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
