@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +28,29 @@ namespace Data.Implementation
 
         public bool Insert(DetalleReporte t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("inser into DetalleReporte values (@IDTransaccion,@IDReporte)", con);
+
+                    query.Parameters.AddWithValue("@IDTransaccion", t.IDTransaccion.IDTransaccion);
+                    query.Parameters.AddWithValue("@IDReporte", t.IDReporte.IDReporte);
+
+                    query.ExecuteNonQuery();
+                    rpta = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return rpta;
         }
 
         public bool Update(DetalleReporte t)
