@@ -71,7 +71,61 @@ namespace Data.Implementation
 
         public Gasto FindByID(int? id)
         {
-            throw new NotImplementedException();
+
+            Gasto gasto = null;
+           
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("select *" +
+                        " from Gasto g,Categoria_Gasto cg where g.IDCategoria_Gasto=cg.IDCategoria_Gasto and g.IDGasto='" + id + "'", con);
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            gasto = new Gasto();
+                            
+                            gasto.IDTransaccion = Convert.ToInt32(dr["IDTransaccion"]);
+                            gasto.NTransaccion = (dr["NTransaccion"]).ToString();
+                            gasto.MontoTransaccion = Convert.ToDecimal(dr["MontoTransaccion"]);
+                            gasto.FechaTransaccion = Convert.ToDateTime(dr["FechaTransaccion"]);
+
+                            var CatGasto = new Categoria_Gasto();
+                                                         var divisa = new Divisa();
+                              var mes = new Mes();
+                              var usuario = new Usuario();
+                              var frecuencia = new Frecuencia();
+
+                            CatGasto.NCategoria_Gasto = (dr["NCategoria_Gasto"]).ToString();
+                            gasto.IDCategoria_Gasto = CatGasto;
+                            
+                              divisa.NDivisa = (dr["NDivisa"]).ToString();
+                              gasto.IDDivisa = divisa;
+                                                          
+                              mes.NMes = (dr["NMes"]).ToString();
+                              gasto.IDMes = mes;
+                                                        
+                              usuario.Nickname = (dr["Nickname"]).ToString();
+                              gasto.IDUsuario = usuario;
+
+                              frecuencia.NFrecuencia = (dr["NFrecuencia"]).ToString();
+                              frecuencia.TDescripcion = (dr["TDescripcion"]).ToString();
+                              gasto.IDFrecuencia = frecuencia;        
+                          
+
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return gasto;
+
         }
 
         public bool Insert(Gasto t)

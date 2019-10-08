@@ -31,10 +31,39 @@ namespace Data.Implementation
 
         public List<Categoria_Gasto> FindAll()
         {
-            throw new NotImplementedException();
+
+            var ListCategoriaGasto = new List<Categoria_Gasto>();
+            try
+            {
+
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("Select * from Categoria_Gasto", con);
+
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var CatGasto = new Categoria_Gasto();
+                           
+                            CatGasto.IDCategoria_Gasto= Convert.ToInt32(dr["IDCategoria_Gasto"]);
+                            CatGasto.NCategoria_Gasto= dr["NCategoria_Gasto"].ToString();
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return ListCategoriaGasto;
         }
 
-        public Categoria_Gasto FindByID(int? id)
+        public Categoria_Gasto FindByID(int? id)//?
+
         {
             throw new NotImplementedException();
         }

@@ -77,6 +77,10 @@ namespace Data.Implementation
         public Usuario FindByID(int? id)
         {
             Usuario usuario_temp = null;
+
+
+            //corregir segun formato correcto
+
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
             {
                 con.Open();

@@ -29,14 +29,41 @@ namespace Data.Implementation
             return rpta;
         }
 
-        public List<DetalleReporte> FindAll()
+
+        public List<DetalleReporte> FindAll()//no se implementa
+
         {
             throw new NotImplementedException();
         }
 
-        public DetalleReporte FindByID(int? id)
+
+        public DetalleReporte FindByID(int? id)//importate
         {
-            throw new NotImplementedException();
+            DetalleReporte detalle = null;
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+             
+                {
+                    con.Open();
+                    var query = new SqlCommand("" + id + "'", con);//modificar base de datos
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                           
+
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return detalle;
+
         }
 
         public bool Insert(DetalleReporte t)

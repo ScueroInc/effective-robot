@@ -31,7 +31,34 @@ namespace Data.Implementation
 
         public List<Categoria_Ingreso> FindAll()
         {
-            throw new NotImplementedException();
+
+            var ListCatIngreso = new List<Categoria_Ingreso>();
+            try
+            {
+
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("Select * from Categoria_Ingreso", con);
+
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var CatIngreso = new Categoria_Ingreso();
+                            CatIngreso.IDCategoria_Ingreso=Convert.ToInt32(dr["IDCategoria_Ingreso"]);
+                            CatIngreso.NCategoria_Ingreso = dr["NCategoria_Ingreso"].ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return ListCatIngreso;
+
         }
 
         public Categoria_Ingreso FindByID(int? id)

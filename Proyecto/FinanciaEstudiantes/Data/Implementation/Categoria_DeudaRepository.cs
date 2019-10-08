@@ -31,12 +31,58 @@ namespace Data.Implementation
 
         public List<Categoria_Deuda> FindAll()
         {
-            throw new NotImplementedException();
+
+            var TipoDeuda = new List<Categoria_Deuda>();
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("Select * from Categoria_Deuda", con);
+
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var CategoriaDeuda = new Categoria_Deuda();
+                            CategoriaDeuda.IDCategoria_Deuda = Convert.ToInt32(dr["IDCategoria_Deuda"]);
+                            CategoriaDeuda.NCategoria_Deuda = (dr["NCategoria_Deuda"]).ToString();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return TipoDeuda;
+
+
         }
 
         public Categoria_Deuda FindByID(int? id)
         {
-            throw new NotImplementedException();
+
+            Categoria_Deuda CategoriaDeuda = null;
+
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+                con.Open();
+                var cmd = new SqlCommand("delete from Categoria_Deuda where IDCategoria_Deuda ='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return rpta;
+
         }
 
         public bool Insert(Categoria_Deuda t)

@@ -31,7 +31,52 @@ namespace Data.Implementation
 
         public List<Deuda> FindAll()
         {
-            throw new NotImplementedException();
+
+            var Deudas = new List<Deuda>();
+            try
+            {
+
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("Select * from Deuda", con);
+
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while(dr.Read())
+                        {
+                            var Deudis = new Deuda();
+
+                            Deudis.IDDeuda = Convert.ToInt32(dr["IDDeuda"]);
+                            Deudis.NDeuda= dr["NDeuda"].ToString();
+                            Deudis.FechaInicioDeuda = dr["FechaInicioDeuda"];//no recuerdo
+                            Deudis.FechaFinDeuda = dr["FechaInicioDeuda"].ToString();//no recuerdo
+                            Deudis.TDescripcion = dr["TDescripcion"].ToString();
+                            Deudis.Interes = Convert.ToInt32(dr["Interes"]);
+                            Deudis.MontoDeuda= Convert.ToInt32(dr["MontoDeuda"]);
+
+                            var Divisa = new Divisa();
+                            Divisa.NDivisa = dr["NDivisa"].ToString();//evaluar
+
+                            var CategoriaDeuda = new Categoria_Deuda();
+                            CategoriaDeuda.NCategoria_Deuda = dr["NCategoria_Deuda"].ToString();
+
+                            var Entidad = new Entidad();
+                            Entidad.NEntidad = dr["NEntidad"].ToString();
+
+                            var Usuario = new Usuario();
+                            Usuario.Nickname= dr["Nickname"].ToString(); //no estoy seguro
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Deudas;
+
         }
 
         public Deuda FindByID(int? id)
