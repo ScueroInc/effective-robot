@@ -29,10 +29,13 @@ namespace Data.Implementation
             return rpta;
         }
 
+
         public List<DetalleReporte> FindAll()//no se implementa
+
         {
             throw new NotImplementedException();
         }
+
 
         public DetalleReporte FindByID(int? id)//importate
         {
@@ -60,6 +63,7 @@ namespace Data.Implementation
                 throw;
             }
             return detalle;
+
         }
 
         public bool Insert(DetalleReporte t)

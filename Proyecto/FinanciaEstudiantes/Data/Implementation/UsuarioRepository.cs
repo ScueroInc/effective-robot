@@ -78,7 +78,9 @@ namespace Data.Implementation
         {
             Usuario usuario_temp = null;
 
+
             //corregir segun formato correcto
+
             using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
             {
                 con.Open();

@@ -31,6 +31,7 @@ namespace Data.Implementation
 
         public List<Categoria_Deuda> FindAll()
         {
+
             var TipoDeuda = new List<Categoria_Deuda>();
 
             try
@@ -59,10 +60,13 @@ namespace Data.Implementation
             }
 
             return TipoDeuda;
+
+
         }
 
         public Categoria_Deuda FindByID(int? id)
         {
+
             Categoria_Deuda CategoriaDeuda = null;
 
             try
@@ -78,6 +82,7 @@ namespace Data.Implementation
                 throw ex;
             }
             return rpta;
+
         }
 
         public bool Insert(Categoria_Deuda t)

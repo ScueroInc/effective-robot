@@ -31,6 +31,7 @@ namespace Data.Implementation
 
         public List<Categoria_Gasto> FindAll()
         {
+
             var ListCategoriaGasto = new List<Categoria_Gasto>();
             try
             {
@@ -62,6 +63,7 @@ namespace Data.Implementation
         }
 
         public Categoria_Gasto FindByID(int? id)//?
+
         {
             throw new NotImplementedException();
         }

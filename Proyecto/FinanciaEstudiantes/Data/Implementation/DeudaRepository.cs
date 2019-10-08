@@ -31,6 +31,7 @@ namespace Data.Implementation
 
         public List<Deuda> FindAll()
         {
+
             var Deudas = new List<Deuda>();
             try
             {
@@ -75,6 +76,7 @@ namespace Data.Implementation
             }
 
             return Deudas;
+
         }
 
         public Deuda FindByID(int? id)

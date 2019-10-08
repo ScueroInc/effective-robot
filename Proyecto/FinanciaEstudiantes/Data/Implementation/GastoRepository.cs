@@ -71,6 +71,7 @@ namespace Data.Implementation
 
         public Gasto FindByID(int? id)
         {
+
             Gasto gasto = null;
            
             try
@@ -124,6 +125,7 @@ namespace Data.Implementation
                 throw;
             }
             return gasto;
+
         }
 
         public bool Insert(Gasto t)

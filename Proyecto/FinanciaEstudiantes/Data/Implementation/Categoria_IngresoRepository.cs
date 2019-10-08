@@ -31,6 +31,7 @@ namespace Data.Implementation
 
         public List<Categoria_Ingreso> FindAll()
         {
+
             var ListCatIngreso = new List<Categoria_Ingreso>();
             try
             {
@@ -57,6 +58,7 @@ namespace Data.Implementation
             }
 
             return ListCatIngreso;
+
         }
 
         public Categoria_Ingreso FindByID(int? id)
