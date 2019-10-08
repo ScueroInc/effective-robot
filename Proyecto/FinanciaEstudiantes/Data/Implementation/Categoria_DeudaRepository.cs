@@ -49,6 +49,8 @@ namespace Data.Implementation
                             CategoriaDeuda.IDCategoria_Deuda = Convert.ToInt32(dr["IDCategoria_Deuda"]);
                             CategoriaDeuda.NCategoria_Deuda = (dr["NCategoria_Deuda"]).ToString();
 
+                            TipoDeuda.Add(CategoriaDeuda);
+
                         }
                     }
                 }
@@ -66,7 +68,7 @@ namespace Data.Implementation
 
         public Categoria_Deuda FindByID(int? id)
         {
-
+            -> esta parte noc q pedo
             Categoria_Deuda CategoriaDeuda = null;
 
             try
@@ -75,13 +77,14 @@ namespace Data.Implementation
                 con.Open();
                 var cmd = new SqlCommand("delete from Categoria_Deuda where IDCategoria_Deuda ='" + id + "'", con);
                 cmd.ExecuteNonQuery();
-                rpta = true;
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return rpta;
+
+            return CategoriaDeuda;
 
         }
 

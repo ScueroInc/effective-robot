@@ -76,39 +76,46 @@ namespace Data.Implementation
 
         public Usuario FindByID(int? id)
         {
-            Usuario usuario_temp = null;
+            Usuario usuario = null;
 
+            //?????
 
-            //corregir segun formato correcto
-
-            using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+            try
             {
-                con.Open();
-                var query = new SqlCommand("select u.IDUsuario, u.Nombre, u.Apellidos,u.Email, u.Nickname, u.Password, u.Celular, u.IDTipoCuenta from Usuario u where u.IDUsuario = '" + id + "'", con);
-                using (var dr = query.ExecuteReader())
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
                 {
-                    while (dr.Read())
+                    con.Open();
+                    var query = new SqlCommand("select u.IDUsuario, u.Nombre, u.Apellidos,u.Email, u.Nickname, u.Password, u.Celular, u.IDTipoCuenta from Usuario u where u.IDUsuario = '" + id + "'", con);
+                    using (var dr = query.ExecuteReader())
                     {
-                        usuario_temp = new Usuario();
-                        var TipoCuenta = new TipoCuenta();
+                        while (dr.Read())
+                        {
+                            usuario = new Usuario();
+                            var TipoCuenta = new TipoCuenta();
 
-                        usuario_temp.IDUsuario = Convert.ToInt32(dr["IDUsuario"]);
-                        usuario_temp.Nombre = dr["Nombre"].ToString();
-                        usuario_temp.Apellidos = dr["Apellidos"].ToString();
-                        usuario_temp.Email = dr["Email"].ToString();
-                        usuario_temp.Nickname = dr["Nickname"].ToString();
-                        usuario_temp.Password = dr["Password"].ToString();
-                        usuario_temp.Celular = Convert.ToInt32(dr["Celular"]);
+                            usuario.IDUsuario = Convert.ToInt32(dr["IDUsuario"]);
+                            usuario.Nombre = dr["Nombre"].ToString();
+                            usuario.Apellidos = dr["Apellidos"].ToString();
+                            usuario.Email = dr["Email"].ToString();
+                            usuario.Nickname = dr["Nickname"].ToString();
+                            usuario.Password = dr["Password"].ToString();
+                            usuario.Celular = Convert.ToInt32(dr["Celular"]);
 
-                        TipoCuenta.IDTipoCuenta = Convert.ToInt32(dr["IDTipoCuenta"]);
-                        TipoCuenta.NTipoCuenta = dr["NTipoCuenta"].ToString();
-                        TipoCuenta.MTipoCuenta = Convert.ToInt32(dr["MTipoCuenta"]);
-                        TipoCuenta.TiempoCuenta = Convert.ToInt32(dr["TiempoCuenta"]);
-                        usuario_temp.IDTipoCuenta = TipoCuenta;
+                            TipoCuenta.IDTipoCuenta = Convert.ToInt32(dr["IDTipoCuenta"]);
+                            TipoCuenta.NTipoCuenta = dr["NTipoCuenta"].ToString();
+                            TipoCuenta.MTipoCuenta = Convert.ToInt32(dr["MTipoCuenta"]);
+                            TipoCuenta.TiempoCuenta = Convert.ToInt32(dr["TiempoCuenta"]);
+                            usuario.IDTipoCuenta = TipoCuenta;
+                        }
                     }
                 }
             }
-            return usuario_temp;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+            return usuario;
         }
 
         public bool Insert(Usuario t)

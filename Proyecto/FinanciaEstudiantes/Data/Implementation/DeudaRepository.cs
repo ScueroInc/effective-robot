@@ -39,7 +39,10 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
                 {
                     con.Open();
-                    var query = new SqlCommand("Select * from Deuda", con);
+                    var query = new SqlCommand("select d.IDDeuda as CodigoDeuda,d.NDeuda,d.FechaInicioDeuda,d.FechaFinDeuda,d.TDescripcion,d.Interes,d.MontoDeuda," +
+                        "di.NDivisa, cd.NCategoria_Deuda, e.NEntidad, u.IDUsuario as CodigoUsuario,u.Nombre,u.Apellidos,u.Email,u.Nickname,u.Celular" +
+                        "from Deuda d, Divisa di, Categoria_Deuda cd, Entidad e, Usuario u " +
+                        "where d.IDDivisa=di.IDDivisa and d.IDCategoria_Deuda=cd.IDCategoria_Deuda and d.IDEntidad=e.IDEntidad and d.IDUsuario=u.IDUsuario", con);
 
                     using (var dr = query.ExecuteReader())
                     {
@@ -49,23 +52,31 @@ namespace Data.Implementation
 
                             Deudis.IDDeuda = Convert.ToInt32(dr["IDDeuda"]);
                             Deudis.NDeuda= dr["NDeuda"].ToString();
-                            Deudis.FechaInicioDeuda = dr["FechaInicioDeuda"];//no recuerdo
-                            Deudis.FechaFinDeuda = dr["FechaInicioDeuda"].ToString();//no recuerdo
+                            Deudis.FechaInicioDeuda = Convert.ToDateTime(dr["FechaInicioDeuda"]); //datetime px
+                            Deudis.FechaFinDeuda = Convert.ToDateTime(dr["FechaFinDeuda"]);
                             Deudis.TDescripcion = dr["TDescripcion"].ToString();
-                            Deudis.Interes = Convert.ToInt32(dr["Interes"]);
-                            Deudis.MontoDeuda= Convert.ToInt32(dr["MontoDeuda"]);
+                            Deudis.Interes = Convert.ToDecimal(dr["Interes"]); // son decimal
+                            Deudis.MontoDeuda= Convert.ToDecimal(dr["MontoDeuda"]);
 
                             var Divisa = new Divisa();
-                            Divisa.NDivisa = dr["NDivisa"].ToString();//evaluar
+                            Divisa.NDivisa = (dr["NDivisa"]).ToString();//evaluar -> q cosa?
 
                             var CategoriaDeuda = new Categoria_Deuda();
-                            CategoriaDeuda.NCategoria_Deuda = dr["NCategoria_Deuda"].ToString();
+                            CategoriaDeuda.NCategoria_Deuda = (dr["NCategoria_Deuda"]).ToString();
 
                             var Entidad = new Entidad();
-                            Entidad.NEntidad = dr["NEntidad"].ToString();
+                            Entidad.NEntidad = (dr["NEntidad"]).ToString();
 
-                            var Usuario = new Usuario();
-                            Usuario.Nickname= dr["Nickname"].ToString(); //no estoy seguro
+                            var usuario = new Usuario();
+                            usuario.Nombre = (dr["Nombre"]).ToString();
+                            usuario.Apellidos = (dr["Apellidos"]).ToString();
+                            usuario.Nickname= dr["Nickname"].ToString(); //no estoy seguro -> pues estate seguro xD
+                            Deudis.IDCategoria_Deuda = CategoriaDeuda;
+                            Deudis.IDDivisa = Divisa;
+                            Deudis.IDEntidad = Entidad;
+
+                            //te falto agregarlos a la lista no mames ahi esta el ejemplo en otras entidades
+                            Deudas.Add(Deudis);
                         }
                     }
                 }

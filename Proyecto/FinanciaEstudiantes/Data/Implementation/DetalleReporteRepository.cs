@@ -30,7 +30,7 @@ namespace Data.Implementation
         }
 
 
-        public List<DetalleReporte> FindAll()//no se implementa
+        public List<DetalleReporte> FindAll()//no se implementa -> porq?
 
         {
             throw new NotImplementedException();
@@ -46,7 +46,7 @@ namespace Data.Implementation
              
                 {
                     con.Open();
-                    var query = new SqlCommand("" + id + "'", con);//modificar base de datos
+                    var query = new SqlCommand("" + id + "'", con);//modificar base de datos ->porq?
                     using (var dr = query.ExecuteReader())
                     {
                         while (dr.Read())
@@ -60,7 +60,7 @@ namespace Data.Implementation
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             return detalle;
 

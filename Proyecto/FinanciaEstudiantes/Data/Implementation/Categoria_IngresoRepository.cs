@@ -48,6 +48,8 @@ namespace Data.Implementation
                             var CatIngreso = new Categoria_Ingreso();
                             CatIngreso.IDCategoria_Ingreso=Convert.ToInt32(dr["IDCategoria_Ingreso"]);
                             CatIngreso.NCategoria_Ingreso = dr["NCategoria_Ingreso"].ToString();
+
+                            ListCatIngreso.Add(CatIngreso);
                         }
                     }
                 }

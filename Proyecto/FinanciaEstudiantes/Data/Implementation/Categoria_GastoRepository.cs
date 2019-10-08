@@ -49,6 +49,8 @@ namespace Data.Implementation
                            
                             CatGasto.IDCategoria_Gasto= Convert.ToInt32(dr["IDCategoria_Gasto"]);
                             CatGasto.NCategoria_Gasto= dr["NCategoria_Gasto"].ToString();
+
+                            ListCategoriaGasto.Add(CatGasto);
                         }
 
                     }

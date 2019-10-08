@@ -43,7 +43,7 @@ namespace Data.Implementation
                         "f.IDFrecuencia as CodigoFrecuencia,f.NFrecuencia,f.TDescripcion" +
                         "from Transaccion t, Divisa d, Mes m, Usuario u, Frecuencia f " +
 
-                        "where t.IDDivisa=d.IDDivisa and t.IDMes=m.IDMes and t.IDUsuario=u.IDUsuario and t.IDFrecuencia=f.IDFrecuencia", con);//REVISAR 
+                        "where t.IDDivisa=d.IDDivisa and t.IDMes=m.IDMes and t.IDUsuario=u.IDUsuario and t.IDFrecuencia=f.IDFrecuencia", con);//REVISAR -> q cosa pe
 
                     using (var dr = query.ExecuteReader())
                     {
