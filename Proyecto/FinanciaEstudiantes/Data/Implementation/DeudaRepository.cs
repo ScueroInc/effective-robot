@@ -13,7 +13,20 @@ namespace Data.Implementation
     {
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+                con.Open();
+                var cmd = new SqlCommand("delete from Deuda where IDDeuda ='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return rpta;
         }
 
         public List<Deuda> FindAll()
@@ -62,7 +75,34 @@ namespace Data.Implementation
 
         public bool Update(Deuda t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("update Deuda set NDeuda=@NDeuda,FechaInicioDeuda=@FechaInicioDeuda,FechaFinDeuda=@FechaFinDeuda,TDescripcion=@TDescripcion,Interes=@Interes,MontoDeuda=@MontoDeuda,IDDivisa=@IDDivisa,IDCategoria_Deuda=@IDCategoria_Deuda,IDEntidad=@IDEntidad where IDDeuda='" + t.IDDeuda + "'", con);
+                    query.Parameters.AddWithValue("@NDeuda", t.NDeuda);
+                    query.Parameters.AddWithValue("@FechaInicioDeuda", t.FechaInicioDeuda);
+                    query.Parameters.AddWithValue("@FechaFinDeuda", t.FechaFinDeuda);
+                    query.Parameters.AddWithValue("@TDescripcion", t.TDescripcion);
+                    query.Parameters.AddWithValue("@Interes", t.Interes);
+                    query.Parameters.AddWithValue("@MontoDeuda", t.MontoDeuda);
+                    query.Parameters.AddWithValue("@IDDivisa", t.IDDivisa.IDDivisa);
+                    query.Parameters.AddWithValue("@IDCategoria_Deuda", t.IDCategoria_Deuda.IDCategoria_Deuda);
+                    query.Parameters.AddWithValue("@IDEntidad", t.IDEntidad.IDEntidad);
+                    query.ExecuteNonQuery();
+
+                    rpta = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return rpta;
         }
     }
 }

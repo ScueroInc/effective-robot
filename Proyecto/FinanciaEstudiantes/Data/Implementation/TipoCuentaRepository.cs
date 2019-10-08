@@ -13,7 +13,20 @@ namespace Data.Implementation
     {
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+                con.Open();
+                var cmd = new SqlCommand("delete from TipoCuenta where IDTipoCuenta ='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return rpta;
         }
 
         public List<TipoCuenta> FindAll()
@@ -24,7 +37,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
                 {
                     con.Open();
-                    var query = new SqlCommand("select IDTipoCuenta,NTipoCuenta,MTipoCuenta,TiempoCuenta from TipoCuenta", con);
+                    var query = new SqlCommand("select IDTipoCuenta as CodigoTipoCuenta,NTipoCuenta,MTipoCuenta,TiempoCuenta from TipoCuenta", con);
 
                     using (var dr = query.ExecuteReader())
                     {
@@ -85,7 +98,28 @@ namespace Data.Implementation
 
         public bool Update(TipoCuenta t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("update TipoCuenta set NTipoCuenta=@NTipoCuenta,MTipoCuenta=@MTipoCuenta,TiempoCuenta=@TiempoCuenta  where IDTipoCuenta='" + t.IDTipoCuenta + "'", con);
+                    query.Parameters.AddWithValue("@NTipoCuenta", t.NTipoCuenta);
+                    query.Parameters.AddWithValue("@MTipoCuenta", t.MTipoCuenta);
+                    query.Parameters.AddWithValue("@TiempoCuenta", t.TiempoCuenta);
+                    query.ExecuteNonQuery();
+
+                    rpta = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return rpta;
         }
     }
 }

@@ -13,7 +13,20 @@ namespace Data.Implementation
     {
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+                con.Open();
+                var cmd = new SqlCommand("delete from Entidad where IDEntidad ='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return rpta;
         }
 
         public List<Entidad> FindAll()
@@ -25,7 +38,7 @@ namespace Data.Implementation
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
                 {
                     con.Open();
-                    var query = new SqlCommand("Select e.IDEntidad, e.NEntidad, et.IDEntidad_Tipo, et.NEntidad_Tipo" +
+                    var query = new SqlCommand("Select e.IDEntidad as CodigoEntidad, e.NEntidad, et.IDEntidad_Tipo as CodigoEntidadTipo, et.NEntidad_Tipo" +
                         "from Entidad e, Entidad_Tipo et where e.IDEntidad_Tipo = et.IDEntidad_Tipo", con);
 
                     using (var dr = query.ExecuteReader())
@@ -37,6 +50,7 @@ namespace Data.Implementation
 
                             entidad.IDEntidad = Convert.ToInt32(dr["IDEntidad"]);
                             entidad.NEntidad = (dr["NEntidad"]).ToString();
+                            entidad_tipo.IDEntidad_Tipo = Convert.ToInt32(dr["IDEntidad_Tipo"]);
                             entidad_tipo.NEntidad_Tipo = (dr["NEntidad_Tipo"]).ToString();
                             entidad.IDEntidad_Tipo = entidad_tipo;
 
@@ -88,7 +102,27 @@ namespace Data.Implementation
 
         public bool Update(Entidad t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("update Entidad set NEntidad=@NEntidad,IDEntidad_Tipo=@IDEntidad_Tipo  where IDEntidad='" + t.IDEntidad + "'", con);
+                    query.Parameters.AddWithValue("@NEntidad", t.NEntidad);
+                    query.Parameters.AddWithValue("@IDEntidad_Tipo", t.IDEntidad_Tipo.IDEntidad_Tipo);
+                    query.ExecuteNonQuery();
+
+                    rpta = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return rpta;
         }
     }
 }

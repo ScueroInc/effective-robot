@@ -13,7 +13,20 @@ namespace Data.Implementation
     {
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+                con.Open();
+                var cmd = new SqlCommand("delete from Entidad_Tipo where IDEntidad_Tipo ='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return rpta;
         }
 
         public List<Entidad_Tipo> FindAll()
@@ -80,7 +93,26 @@ namespace Data.Implementation
 
         public bool Update(Entidad_Tipo t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("update Entidad_Tipo set NEntidad_Tipo=@NEntidad_Tipo where IDEntidad_Tipo='" + t.IDEntidad_Tipo + "'", con);
+                    query.Parameters.AddWithValue("@NEntidad_Tipo", t.NEntidad_Tipo);
+                    query.ExecuteNonQuery();
+
+                    rpta = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return rpta;
         }
     }
 }

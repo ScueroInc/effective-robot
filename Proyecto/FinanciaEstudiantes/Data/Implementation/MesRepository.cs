@@ -13,12 +13,52 @@ namespace Data.Implementation
     {
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+                con.Open();
+                var cmd = new SqlCommand("delete from Mes where IDMes ='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return rpta;
         }
 
         public List<Mes> FindAll()
         {
-            throw new NotImplementedException();
+            var Meses = new List<Mes>();
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("select IDMes as CodigoMes,NMes from Mes", con);
+
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var mes = new Mes();
+                            mes.IDMes = Convert.ToInt32(dr["IDMes"]);
+                            mes.NMes = (dr["NMes"]).ToString();
+
+
+                            Meses.Add(mes);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Meses;
         }
 
         public Mes FindByID(int? id)
@@ -53,7 +93,28 @@ namespace Data.Implementation
 
         public bool Update(Mes t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("update Mes set NMes=@NMes where IDMes='" + t.IDMes + "'", con);
+                    query.Parameters.AddWithValue("@NMes", t.NMes);
+
+                    query.ExecuteNonQuery();
+
+                    rpta = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return rpta;
         }
     }
+    
 }

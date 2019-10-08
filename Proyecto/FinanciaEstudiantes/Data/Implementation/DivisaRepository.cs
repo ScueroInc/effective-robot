@@ -13,12 +13,51 @@ namespace Data.Implementation
     {
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+            try
+            {
+                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
+                con.Open();
+                var cmd = new SqlCommand("delete from Divisa where IDDivisa ='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return rpta;
         }
 
         public List<Divisa> FindAll()
         {
-            throw new NotImplementedException();
+            var Divisas = new List<Divisa>();
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("select IDDivisa as CodigoDivisa,NDivisa from Divisa", con);
+
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var divisa = new Divisa();
+                            divisa.IDDivisa = Convert.ToInt32(dr["IDDivisa"]);
+                            divisa.NDivisa = (dr["NDivisa"]).ToString();
+
+                            Divisas.Add(divisa);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Divisas;
         }
 
         public Divisa FindByID(int? id)
@@ -53,7 +92,26 @@ namespace Data.Implementation
 
         public bool Update(Divisa t)
         {
-            throw new NotImplementedException();
+            bool rpta = false;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+                {
+                    con.Open();
+                    var query = new SqlCommand("update Divisa set NDivisa=@NDivisa where IDDivisa='" + t.IDDivisa + "'", con);
+                    query.Parameters.AddWithValue("@NDivisa", t.NDivisa);
+                    query.ExecuteNonQuery();
+
+                    rpta = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return rpta;
         }
     }
 }

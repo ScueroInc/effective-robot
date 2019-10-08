@@ -23,7 +23,7 @@ namespace Entity
 
         [Required(ErrorMessage = "Porfavor, ingrese una fecha de fin del reporte: ")]
         [DisplayName("Fecha de fin")]
-        public DateTime FechaFin { get; set; }
+        public DateTime FechaTermino { get; set; }
 
     }
 }

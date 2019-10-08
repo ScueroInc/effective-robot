@@ -18,10 +18,9 @@ namespace Data.Implementation
             {
                 var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
                 con.Open();
-                var cmd = new SqlCommand("delete from Usuario where IDUsuario=" + id, con);
+                var cmd = new SqlCommand("delete from Usuario where IDUsuario ='" + id + "'", con);
                 cmd.ExecuteNonQuery();
                 rpta = true;
-                con.Close();
             }
             catch (Exception ex)
             {
@@ -33,43 +32,45 @@ namespace Data.Implementation
         public List<Usuario> FindAll()
         {
             List<Usuario> Lista_usuarios = new List<Usuario>();
+
             try
             {
                 using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
                 {
                     con.Open();
-                    var query = new SqlCommand("select u.IDUsuario, u.Nombre, u.Apellidos,u.Email, u.Nickname, u.Password, u.Celular, u.IDTipoCuenta from usuario u", con);
+                    var query = new SqlCommand("select u.IDUsuario as CodigoUsuario, u.Nombre, u.Apellidos,u.Email, u.Nickname, u.Password, u.Celular, tc.IDTipoCuenta as CodigoTipoCuenta, tc.NTipoCuenta, tc.MTipoCuenta, tc.TiempoCuenta " +
+                        "from Usuario u, TipoCuenta tc where u.IDTipoCuenta=tc.IDTipoCuenta", con);
                     using (var dr = query.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-                            Usuario usuario_temp = new Usuario();
                             var TipoCuenta = new TipoCuenta();
                             var usuario = new Usuario();
 
-                            usuario_temp.IDUsuario = Convert.ToInt32(dr["IDUsuario"]);
-                            usuario_temp.Nombre = dr["Nombre"].ToString();
-                            usuario_temp.Apellido = dr["Apellidos"].ToString();
-                            usuario_temp.Email = dr["Email"].ToString();
-                            usuario_temp.Nickname = dr["Nickname"].ToString();
-                            usuario_temp.Password = dr["Password"].ToString();
-                            usuario_temp.Celular = Convert.ToInt32(dr["Celular"]);
+                            usuario.IDUsuario = Convert.ToInt32(dr["IDUsuario"]);
+                            usuario.Nombre = dr["Nombre"].ToString();
+                            usuario.Apellidos = dr["Apellidos"].ToString();
+                            usuario.Email = dr["Email"].ToString();
+                            usuario.Nickname = dr["Nickname"].ToString();
+                            usuario.Password = dr["Password"].ToString();
+                            usuario.Celular = Convert.ToInt32(dr["Celular"]);
 
                             TipoCuenta.IDTipoCuenta = Convert.ToInt32(dr["IDTipoCuenta"]);
                             TipoCuenta.NTipoCuenta = dr["NTipoCuenta"].ToString();
-                            TipoCuenta.MTipoCuenta = Convert.ToInt32(dr["MTipoCuenta"]);
+                            TipoCuenta.MTipoCuenta = Convert.ToDecimal(dr["MTipoCuenta"]);
                             TipoCuenta.TiempoCuenta = Convert.ToInt32(dr["TiempoCuenta"]);
-                            usuario_temp.IDTipoCuenta = TipoCuenta;
+                            usuario.IDTipoCuenta = TipoCuenta;
 
-                            Lista_usuarios.Add(usuario_temp);
+                            Lista_usuarios.Add(usuario);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
+
             return Lista_usuarios;
         }
 
@@ -89,7 +90,7 @@ namespace Data.Implementation
 
                         usuario_temp.IDUsuario = Convert.ToInt32(dr["IDUsuario"]);
                         usuario_temp.Nombre = dr["Nombre"].ToString();
-                        usuario_temp.Apellido = dr["Apellidos"].ToString();
+                        usuario_temp.Apellidos = dr["Apellidos"].ToString();
                         usuario_temp.Email = dr["Email"].ToString();
                         usuario_temp.Nickname = dr["Nickname"].ToString();
                         usuario_temp.Password = dr["Password"].ToString();
@@ -118,7 +119,7 @@ namespace Data.Implementation
                     var query = new SqlCommand("insert into Usuario values (@Nombre, @Apellidos, @Email, @Nickname, @Password, @Celular, @IDTipoCuenta)", con);
 
                     query.Parameters.AddWithValue("@Nombre", t.Nombre);
-                    query.Parameters.AddWithValue("@Apellidos", t.Apellido);
+                    query.Parameters.AddWithValue("@Apellidos", t.Apellidos);
                     query.Parameters.AddWithValue("@Email", t.Email);
                     query.Parameters.AddWithValue("@Nickname", t.Nickname);
                     query.Parameters.AddWithValue("@Password", t.Password);
@@ -132,7 +133,7 @@ namespace Data.Implementation
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return rpta;
@@ -149,7 +150,7 @@ namespace Data.Implementation
 
                     var query = new SqlCommand("update Usuario set Nombre=@Nombre, Apellidos=@Apellidos, Email=@Email, Nickname=@Nickname, Password=@Password, Celular=@Celular, IDTipoCuenta=@IDTipoCuenta where IDUsuario='" + t.IDUsuario + "'", con);
                     query.Parameters.AddWithValue("@Nombre", t.Nombre);
-                    query.Parameters.AddWithValue("@Apellidos", t.Apellido);
+                    query.Parameters.AddWithValue("@Apellidos", t.Apellidos);
                     query.Parameters.AddWithValue("@Email", t.Email);
                     query.Parameters.AddWithValue("@Nickname", t.Nickname);
                     query.Parameters.AddWithValue("@Password", t.Password);
