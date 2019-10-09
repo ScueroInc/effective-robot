@@ -65,7 +65,35 @@ namespace Data.Implementation
 
         public Categoria_Ingreso FindByID(int? id)
         {
-            throw new NotImplementedException();
+            Categoria_Ingreso CategoriaIngreso = null;
+
+            try
+            {
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+
+                {
+                    con.Open();
+                    var query = new SqlCommand("select NCategoria_Ingreso Categoría" + "from Categoria_Ingreso where IDCategoria_Ingreso=" + id + "'", con);
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            CategoriaIngreso = new Categoria_Ingreso();
+
+                            CategoriaIngreso.IDCategoria_Ingreso = Convert.ToInt32(dr["IDCategoria_Ingreso"]);
+                            CategoriaIngreso.NCategoria_Ingreso = (dr["NCategoria_Ingreso"]).ToString();
+
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return CategoriaIngreso;
         }
 
         public bool Insert(Categoria_Ingreso t)

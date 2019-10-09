@@ -68,16 +68,29 @@ namespace Data.Implementation
 
         public Categoria_Deuda FindByID(int? id)
         {
-            -> esta parte noc q pedo
+           
             Categoria_Deuda CategoriaDeuda = null;
 
             try
             {
-                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
-                con.Open();
-                var cmd = new SqlCommand("delete from Categoria_Deuda where IDCategoria_Deuda ='" + id + "'", con);
-                cmd.ExecuteNonQuery();
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
 
+                {
+                    con.Open();
+                    var query = new SqlCommand("select NCategoria_Gasto Categoría" + "from Categoria_Gasto where IDCategoria_Gasto="+id+"'", con);
+                    using (var dr = query.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            CategoriaDeuda = new Categoria_Deuda();
+
+                            CategoriaDeuda.IDCategoria_Deuda = Convert.ToInt32(dr["IDCategoria_Deuda"]);
+                            CategoriaDeuda.NCategoria_Deuda = (dr["NCategoria_Gasto"]).ToString();
+                           
+                        }
+                    }
+                    
+                }
             }
             catch (Exception ex)
             {

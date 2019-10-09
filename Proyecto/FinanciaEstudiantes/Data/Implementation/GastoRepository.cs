@@ -45,18 +45,20 @@ namespace Data.Implementation
                     {
                         while (dr.Read())
                         {
-                            var transaccion = new Gasto();
+                            var gasto = new Gasto();
                             var categoria_gasto = new Categoria_Gasto();
-                            transaccion.IDTransaccion = Convert.ToInt32(dr["IDTransaccion"]);
-                            transaccion.NTransaccion = (dr["NTransaccion"]).ToString();
-                            transaccion.MontoTransaccion = Convert.ToDecimal(dr["MontoTransaccion"]);
-                            transaccion.FechaTransaccion = Convert.ToDateTime(dr["FechaTransaccion"]);
+                            gasto.IDTransaccion = Convert.ToInt32(dr["IDTransaccion"]);
+                            gasto.NTransaccion = (dr["NTransaccion"]).ToString();
+                            gasto.MontoTransaccion = Convert.ToDecimal(dr["MontoTransaccion"]);
+                            gasto.FechaTransaccion = Convert.ToDateTime(dr["FechaTransaccion"]);
 
                             categoria_gasto.IDCategoria_Gasto = Convert.ToInt32(dr["IDCategoria_Gasto"]);
                             categoria_gasto.NCategoria_Gasto = (dr["NCategoria_Gasto"]).ToString();
-                            transaccion.IDCategoria_Gasto = categoria_gasto;
-
-                            Gastos.Add(transaccion);
+                            gasto.IDCategoria_Gasto = categoria_gasto;
+                            
+                             
+                            
+                            Gastos.Add(gasto);
                         }
                     }
                 }
@@ -81,7 +83,7 @@ namespace Data.Implementation
                     con.Open();
                     var query = new SqlCommand("select g.IDGasto as CodigoGasto, t.NTransaccion,t.MontoTransaccion,t.FechaTransaccion" +
                         "cg.IDCategoria_Gasto as CodigoCategoriaG,cg.NCategoria_Gasto from Gasto g, Transaccion t, Categoria_Gasto cg" +
-                        "where g.IDGasto=t.IDTransaccion and g.IDCategoria_Gasto=cg.IDCategoria_Gasto and g.IDGasto='" + id + "'", con);
+                        "where g.IDGasto=t.IDTransaccion and g.IDCategoria_Gasto=cg.IDCategoria_Gasto and g.IDGasto='" + id + "'", con); 
                     using (var dr = query.ExecuteReader())
                     {
                         while (dr.Read())
@@ -97,6 +99,25 @@ namespace Data.Implementation
                             categoria_gasto.NCategoria_Gasto = (dr["NCategoria_Gasto"]).ToString();
                             gasto.IDCategoria_Gasto = categoria_gasto;
 
+
+                            var divisa = new Divisa();
+                            var mes = new Mes();
+                            var usuario = new Usuario();
+                            var frecuencia = new Frecuencia();
+
+
+                            divisa.NDivisa = (dr["NDivisa"]).ToString();
+                            gasto.IDDivisa = divisa;
+
+                            mes.NMes = (dr["NMes"]).ToString();
+                            gasto.IDMes = mes;
+
+                            usuario.Nickname = (dr["Nickname"]).ToString();
+                            gasto.IDUsuario = usuario;
+
+                            frecuencia.NFrecuencia = (dr["NFrecuencia"]).ToString();
+                            frecuencia.TDescripcion = (dr["TDescripcion"]).ToString();
+                            gasto.IDFrecuencia = frecuencia;
 
                         }
                     }

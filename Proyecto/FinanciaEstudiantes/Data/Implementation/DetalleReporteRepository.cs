@@ -30,7 +30,7 @@ namespace Data.Implementation
         }
 
 
-        public List<DetalleReporte> FindAll()//no se implementa -> porq?
+        public List<DetalleReporte> FindAll()
 
         {
             throw new NotImplementedException();
@@ -40,18 +40,29 @@ namespace Data.Implementation
         public DetalleReporte FindByID(int? id)//importate
         {
             DetalleReporte detalle = null;
+
             try
             {
-                var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString());
-             
+                using (var con = new SqlConnection(ConfigurationManager.ConnectionStrings["BD_Financiamiento"].ToString()))
+
                 {
                     con.Open();
-                    var query = new SqlCommand("" + id + "'", con);//modificar base de datos ->porq?
+                    var query = new SqlCommand("select NCategoria_Gasto Categoría" + "from Categoria_Gasto where IDCategoria_Gasto=" + id + "'", con);
                     using (var dr = query.ExecuteReader())
                     {
                         while (dr.Read())
                         {
-                           
+                            detalle = new DetalleReporte();
+                            var transaccion = new Transaccion();
+                            var reporte = new Reporte();
+                            
+
+                            transaccion.IDTransaccion= Convert.ToInt32(dr["IDTransaccion"]);
+                            transaccion.MontoTransaccion= Convert.ToInt32(dr["MontoTransaccion"]);
+                            transaccion.FechaTransaccion = Convert.ToDateTime(dr["FechaTransaccion"]);
+
+                           // detalle.IDReporte = Convert.ToInt32(dr["IDReporte"]);
+                            //detalle.IDTransaccion = Convert.ToInt32(transaccion.IDTransaccion);
 
                         }
                     }
@@ -62,6 +73,7 @@ namespace Data.Implementation
             {
                 throw ex;
             }
+
             return detalle;
 
         }
