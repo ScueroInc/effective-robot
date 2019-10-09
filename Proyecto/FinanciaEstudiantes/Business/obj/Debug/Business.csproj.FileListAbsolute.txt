@@ -1,2 +1,0 @@
-C:\Users\Administrador\source\repos\FinanciaEstudiantes\Business\obj\Debug\Business.csprojAssemblyReference.cache
-C:\Users\Administrador\source\repos\FinanciaEstudiantes\Business\obj\Debug\Business.csproj.CoreCompileInputs.cache
