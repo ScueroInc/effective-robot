@@ -1,0 +1,26 @@
+﻿@model WebFinanciamiento.Models.Categoria_Gasto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Categoria_Gasto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NCategoria_Gasto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NCategoria_Gasto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDCategoria_Gasto }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

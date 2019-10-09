@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebFinanciamiento.Models.Categoria_Gasto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NCategoria_Gasto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NCategoria_Gasto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDCategoria_Gasto }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDCategoria_Gasto }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDCategoria_Gasto })
+        </td>
+    </tr>
+}
+
+</table>
