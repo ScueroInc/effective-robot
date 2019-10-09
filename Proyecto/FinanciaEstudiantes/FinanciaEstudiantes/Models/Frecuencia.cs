@@ -22,7 +22,6 @@ namespace FinanciaEstudiantes.Models
     
         public int IDFrecuencia { get; set; }
         public string NFrecuencia { get; set; }
-        public string TDescripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaccion> Transaccion { get; set; }

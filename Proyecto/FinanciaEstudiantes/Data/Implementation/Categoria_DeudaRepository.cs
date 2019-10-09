@@ -68,7 +68,6 @@ namespace Data.Implementation
 
         public Categoria_Deuda FindByID(int? id)
         {
-            -> esta parte noc q pedo
             Categoria_Deuda CategoriaDeuda = null;
 
             try

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - > Dexter ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -23,20 +23,19 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Usuario", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Reportes", "Index", "Reporte")</li>
+                    <li>@Html.ActionLink("Transacciones", "Index", "Transaccion")</li>
+                    <li>@Html.ActionLink("Deudas", "Index", "Deuda")</li>
+                    <li>@Html.ActionLink("Ingresos", "Index", "Ingreso")</li>
+                    <li>@Html.ActionLink("Gastos", "Index", "Gasto")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
-
-     
-
         @RenderBody()
-
-       
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>

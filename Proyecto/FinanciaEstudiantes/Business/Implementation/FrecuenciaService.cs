@@ -4,34 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity;
+using Data;
+using Data.Implementation;
 
 namespace Business.Implementation
 {
     public class FrecuenciaService : IFrecuenciaService
     {
+        private IFrecuenciaRepository objFrecuenciaRepository = new FrecuenciaRepository();
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            return objFrecuenciaRepository.Delete(id);
         }
 
-        public Frecuencia FinByID(int? id)
+        public Frecuencia FindByID(int? id)
         {
-            throw new NotImplementedException();
+            return objFrecuenciaRepository.FindByID(id);
         }
 
         public List<Frecuencia> FindAll()
         {
-            throw new NotImplementedException();
+            return objFrecuenciaRepository.FindAll();
         }
 
         public bool Insert(Frecuencia t)
         {
-            throw new NotImplementedException();
+            return objFrecuenciaRepository.Insert(t);
         }
 
         public bool Update(Frecuencia t)
         {
-            throw new NotImplementedException();
+            return objFrecuenciaRepository.Update(t);
         }
     }
 }

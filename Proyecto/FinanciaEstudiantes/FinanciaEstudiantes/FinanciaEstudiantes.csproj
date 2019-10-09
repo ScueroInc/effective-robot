@@ -176,65 +176,59 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Categoria_Deuda.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria_Gasto.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria_Ingreso.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Deuda.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Divisa.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entidad.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entidad_Tipo.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanciamientoDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinanciamientoDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanciamientoDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinanciamientoDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinanciamientoDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Frecuencia.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Mes.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModeloDinanciamiento.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloDinanciamiento.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModeloDinanciamiento.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModeloDinanciamiento.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModeloDinanciamiento.edmx</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reporte.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoCuenta.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transaccion.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
-      <DependentUpon>ModeloDinanciamiento.tt</DependentUpon>
+      <DependentUpon>FinanciamientoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -248,24 +242,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\ModeloDinanciamiento.Context.tt">
+    <Content Include="Models\FinanciamientoDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloDinanciamiento.edmx</DependentUpon>
-      <LastGenOutput>ModeloDinanciamiento.Context.cs</LastGenOutput>
+      <DependentUpon>FinanciamientoDB.edmx</DependentUpon>
+      <LastGenOutput>FinanciamientoDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModeloDinanciamiento.tt">
+    <Content Include="Models\FinanciamientoDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModeloDinanciamiento.edmx</DependentUpon>
-      <LastGenOutput>ModeloDinanciamiento.cs</LastGenOutput>
+      <DependentUpon>FinanciamientoDB.edmx</DependentUpon>
+      <LastGenOutput>FinanciamientoDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\ModeloDinanciamiento.edmx">
+    <EntityDeploy Include="Models\FinanciamientoDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModeloDinanciamiento.Designer.cs</LastGenOutput>
+      <LastGenOutput>FinanciamientoDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ModeloDinanciamiento.edmx.diagram">
-      <DependentUpon>ModeloDinanciamiento.edmx</DependentUpon>
+    <Content Include="Models\FinanciamientoDB.edmx.diagram">
+      <DependentUpon>FinanciamientoDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

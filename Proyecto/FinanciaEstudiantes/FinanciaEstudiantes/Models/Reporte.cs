@@ -20,10 +20,10 @@ namespace FinanciaEstudiantes.Models
             this.Transaccion = new HashSet<Transaccion>();
         }
     
-        public int IDReporte { get; set; }
         public System.DateTime FechaReporte { get; set; }
         public System.DateTime FechaInicio { get; set; }
         public System.DateTime FechaTermino { get; set; }
+        public int IDReporte { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transaccion> Transaccion { get; set; }

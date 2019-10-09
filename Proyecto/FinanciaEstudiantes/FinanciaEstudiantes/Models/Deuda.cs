@@ -22,7 +22,7 @@ namespace FinanciaEstudiantes.Models
         public Nullable<float> Interes { get; set; }
         public decimal MontoDeuda { get; set; }
         public int IDDivisa { get; set; }
-        public int IDCategoriaDeuda { get; set; }
+        public int IDCategoria_Deuda { get; set; }
         public int IDEntidad { get; set; }
         public int IDUsuario { get; set; }
     

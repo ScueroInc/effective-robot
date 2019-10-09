@@ -4,34 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity;
+using Data;
+using Data.Implementation;
 
 namespace Business.Implementation
 {
     public class DivisaService : IDivisaService
     {
+        private IDivisaRepository objDivisaRepo = new DivisaRepository();
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            return objDivisaRepo.Delete(id);
         }
 
-        public Divisa FinByID(int? id)
+        public Divisa FindByID(int? id)
         {
-            throw new NotImplementedException();
+            return objDivisaRepo.FindByID(id);
         }
 
         public List<Divisa> FindAll()
         {
-            throw new NotImplementedException();
+            return objDivisaRepo.FindAll();
         }
 
         public bool Insert(Divisa t)
         {
-            throw new NotImplementedException();
+            return objDivisaRepo.Insert(t);
         }
 
         public bool Update(Divisa t)
         {
-            throw new NotImplementedException();
+            return objDivisaRepo.Update(t);
         }
     }
 }

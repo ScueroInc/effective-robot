@@ -20,8 +20,8 @@ namespace FinanciaEstudiantes.Models
             this.Deuda = new HashSet<Deuda>();
         }
     
-        public int IDCategoriaDeuda { get; set; }
-        public string NCategoriaDeuda { get; set; }
+        public int IDCategoria_Deuda { get; set; }
+        public string NCategoria_Deuda { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Deuda> Deuda { get; set; }

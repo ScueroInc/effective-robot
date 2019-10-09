@@ -18,8 +18,6 @@ namespace FinanciaEstudiantes.Models
         public Transaccion()
         {
             this.Reporte = new HashSet<Reporte>();
-            this.Categoria_Gasto = new HashSet<Categoria_Gasto>();
-            this.Categoria_Ingreso = new HashSet<Categoria_Ingreso>();
         }
     
         public int IDTransaccion { get; set; }
@@ -37,9 +35,7 @@ namespace FinanciaEstudiantes.Models
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reporte> Reporte { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Categoria_Gasto> Categoria_Gasto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Categoria_Ingreso> Categoria_Ingreso { get; set; }
+        public virtual Categoria_Gasto Categoria_Gasto { get; set; }
+        public virtual Categoria_Ingreso Categoria_Ingreso { get; set; }
     }
 }

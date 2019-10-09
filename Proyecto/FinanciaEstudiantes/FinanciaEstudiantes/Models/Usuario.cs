@@ -21,6 +21,7 @@ namespace FinanciaEstudiantes.Models
             this.Transaccion = new HashSet<Transaccion>();
         }
     
+        public int IDUsuario { get; set; }
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
         public string Email { get; set; }
@@ -28,7 +29,6 @@ namespace FinanciaEstudiantes.Models
         public string Password { get; set; }
         public string Celular { get; set; }
         public int IDTipoCuenta { get; set; }
-        public int IDUsuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Deuda> Deuda { get; set; }

@@ -4,34 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entity;
+using Data;
+using Data.Implementation;
 
 namespace Business.Implementation
 {
     public class TransaccionService : ITransaccionService
     {
+        private ITransaccionRepository objTransaccionRepository = new TransaccionRepository();
         public bool Delete(int? id)
         {
-            throw new NotImplementedException();
+            return objTransaccionRepository.Delete(id);
         }
 
-        public Transaccion FinByID(int? id)
+        public Transaccion FindByID(int? id)
         {
-            throw new NotImplementedException();
+            return objTransaccionRepository.FindByID(id);
         }
 
         public List<Transaccion> FindAll()
         {
-            throw new NotImplementedException();
+            return objTransaccionRepository.FindAll();
         }
 
         public bool Insert(Transaccion t)
         {
-            throw new NotImplementedException();
+            return objTransaccionRepository.Insert(t);
         }
 
         public bool Update(Transaccion t)
         {
-            throw new NotImplementedException();
+            return objTransaccionRepository.Update(t);
         }
     }
 }

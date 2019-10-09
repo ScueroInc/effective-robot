@@ -16,6 +16,6 @@ namespace Business
 
         List<T> FindAll();
 
-        T FinByID(int? id);
+        T FindByID(int? id);
     }
 }
